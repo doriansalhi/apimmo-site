@@ -9,15 +9,15 @@ import { ProgrammesNeufs, Estimer, BiensVendus, Agence, Actualites, Contact } fr
 
 const META = {
   '/': {
-    title: 'Apimmo — Agence immobilière de prestige à Marseille',
-    desc: "Apimmo, agence immobilière de prestige à Marseille. Achat, vente et estimation de biens d'exception : villas vue mer, appartements bourgeois, bastides.",
+    title: 'Apimmo — Votre Agence immobilière à Marseille ',
+    desc: "Apimmo, agence immobilière à Marseille. Achat, vente et estimation de biens d'exception : villas vue mer, appartements bourgeois, bastides.",
   },
   '/acheter': {
     title: "Acheter un bien d'exception à Marseille | Apimmo",
-    desc: "Villas, appartements de prestige et propriétés de caractère à vendre à Marseille et sur le littoral. Sélection Apimmo.",
+    desc: "Villas, appartements et propriétés de caractère à vendre à Marseille et sur le littoral. Sélection Apimmo.",
   },
   '/programmes-neufs': {
-    title: 'Programmes neufs de prestige à Marseille | Apimmo',
+    title: 'Programmes neufs à Marseille | Apimmo',
     desc: "Résidences neuves haut de gamme à Marseille et Cassis : appartements et villas, sélectionnés par Apimmo.",
   },
   '/estimer': {
@@ -26,14 +26,14 @@ const META = {
   },
   '/biens-vendus': {
     title: 'Biens vendus | Apimmo Marseille',
-    desc: 'Nos dernières ventes de prestige à Marseille et alentours. Votre bien pourrait être le prochain.',
+    desc: 'Nos dernières ventes  à Marseille et alentours. Votre bien pourrait être le prochain.',
   },
   '/agence': {
     title: "L'agence Apimmo — Notre histoire et notre équipe",
-    desc: "Découvrez Apimmo : une agence marseillaise indépendante dédiée à l'immobilier de prestige, rue du Capitaine Dessemond.",
+    desc: "Découvrez Apimmo : une agence marseillaise indépendante dédiée à l'immobilier , rue du Capitaine Dessemond.",
   },
   '/actualites': {
-    title: 'Actualités du marché immobilier de prestige | Apimmo',
+    title: 'Actualités du marché immobilier  | Apimmo',
     desc: 'Analyses de marché, conseils vendeurs et acquéreurs, vie de l’agence : les actualités Apimmo.',
   },
   '/contact': {
