@@ -1,6 +1,5 @@
 // ============================================================
-// Données de démonstration — à remplacer par vos biens réels
-// (ou à brancher sur Supabase / votre logiciel de transaction)
+// Données du site — coordonnées, biens de démonstration, articles
 // ============================================================
 const U = (id, w = 1200) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
@@ -142,12 +141,6 @@ export const VENDUS = [
   { id: 'v6', ref: 'AP-2344', titre: 'Appartement terrasse — Périer', ville: 'Marseille 8e', surface: 134, photo: U('photo-1600047509807-ba8f99d2cdde'), extrait: 'Estimé, mis en scène et vendu en un mois.' },
 ];
 
-export const PROGRAMMES = [
-  { id: 'p1', titre: 'Les Terrasses du Pharo', ville: 'Marseille 7e', photo: U('photo-1545324418-cc1a3fa10c00'), extrait: 'Résidence intimiste de 12 appartements, du T2 au T5, terrasses plein sud face à la mer. Livraison T4 2027.', prix: 'À partir de 420 000 €' },
-  { id: 'p2', titre: 'Domaine des Calanques', ville: 'Cassis', photo: U('photo-1512915922686-57c11dde9b6b'), extrait: 'Villas neuves de 120 à 180 m² avec piscine privative, en lisière du Parc national. Dernières opportunités.', prix: 'À partir de 1 150 000 €' },
-  { id: 'p3', titre: 'Villa Paradis', ville: 'Marseille 6e', photo: U('photo-1600607687644-c7171b42498b'), extrait: 'Réhabilitation d\u2019un immeuble bourgeois : 8 appartements de prestige, prestations haute couture. Éligible déficit foncier.', prix: 'À partir de 380 000 €' },
-];
-
 export const EQUIPE = [
   {
     nom: 'Alexandre Perrin',
@@ -169,27 +162,150 @@ export const EQUIPE = [
   },
 ];
 
+// ============================================================
+// ARTICLES — actualités avec contenu intégral
+// Chaque article : slug (URL), titre, date, extrait, photo,
+// sections [{ h: sous-titre ou null, p: [paragraphes] }]
+// ============================================================
 export const ACTUS = [
   {
     id: 'a1',
+    slug: 'immobilier-marseille-2026-acheteurs',
     date: '12 juin 2026',
-    titre: 'Marché du prestige à Marseille : le bilan du premier semestre 2026',
-    extrait: "Volumes, prix au mètre carré, secteurs les plus recherchés : notre analyse complète du marché haut de gamme marseillais.",
-    photo: U('photo-1449824913935-59a10b8d2000'),
+    titre: 'Immobilier à Marseille : ce qui change en 2026 pour les acheteurs',
+    extrait: "Taux, prix au mètre carré, quartiers qui bougent : le point sur le marché marseillais et nos conseils pour acheter au bon moment.",
+    photo: U('photo-1566838217578-1903568a76d9'),
+    sections: [
+      {
+        h: null,
+        p: [
+          "Acheter un appartement ou une maison à Marseille en 2026, c'est arriver sur un marché qui a beaucoup évolué en quelques années. Entre l'évolution des taux de crédit, des prix qui varient fortement d'un arrondissement à l'autre et des quartiers en pleine transformation, il est facile de s'y perdre. Voici les repères essentiels pour aborder votre projet sereinement.",
+        ],
+      },
+      {
+        h: 'Des taux qui redonnent de l\u2019air aux acheteurs',
+        p: [
+          "Après plusieurs années de hausse, les conditions de financement se sont progressivement détendues. Concrètement, cela signifie qu'à mensualité égale, votre capacité d'emprunt est meilleure qu'il y a deux ans. C'est le moment de refaire calculer votre budget : de nombreux acheteurs qui avaient mis leur projet en pause découvrent qu'il est redevenu réalisable.",
+          "Notre conseil : avant même de visiter, faites établir une simulation de financement à jour par votre banque ou un courtier. À Marseille, les bons biens partent vite — un dossier de financement solide fait souvent la différence face à un autre acquéreur.",
+        ],
+      },
+      {
+        h: 'Des prix très contrastés selon les quartiers',
+        p: [
+          "Marseille reste l'une des grandes villes françaises les plus accessibles, mais avec des écarts considérables : le mètre carré peut varier du simple au triple entre certains quartiers du centre et les secteurs les plus recherchés du littoral, comme le 7e ou le 8e arrondissement.",
+          "Cette diversité est une chance pour les acheteurs : à budget égal, vous pouvez choisir entre un grand appartement à rénover dans un quartier en devenir, ou une surface plus compacte dans un secteur déjà établi. Tout dépend de votre projet de vie — et c'est précisément là qu'un regard local fait la différence.",
+        ],
+      },
+      {
+        h: 'Les quartiers à suivre cette année',
+        p: [
+          "Les grands projets urbains continuent de transformer la ville : les abords d'Euroméditerranée poursuivent leur mutation, les quartiers proches du centre comme Chave, Camas ou la Plaine attirent une nouvelle génération d'habitants, et le littoral sud reste une valeur sûre pour qui cherche la mer au quotidien.",
+          "Attention toutefois aux effets d'annonce : un quartier « qui monte » ne convient pas à tous les projets. Investissement locatif, résidence principale, pied-à-terre — chaque objectif a ses secteurs de prédilection.",
+        ],
+      },
+      {
+        h: 'Nos conseils pour acheter au bon moment',
+        p: [
+          "Le bon moment pour acheter, c'est d'abord celui où votre projet est prêt : financement validé, critères clairs, secteur ciblé. Ensuite, entourez-vous : une agence qui connaît la rue, l'immeuble, parfois même la copropriété, vous évitera les mauvaises surprises et vous alertera sur les vraies opportunités avant qu'elles ne soient partout.",
+          "Chez Apimmo, nous accompagnons chaque acheteur comme s'il s'agissait de notre propre recherche : sélection de biens correspondant réellement à vos critères, visites préparées, et négociation menée dans votre intérêt. Parlons de votre projet.",
+        ],
+      },
+    ],
   },
   {
     id: 'a2',
+    slug: 'vendre-appartement-marseille-erreurs',
     date: '28 mai 2026',
-    titre: 'Vendre une propriété d\u2019exception : les 5 étapes d\u2019une vente réussie',
-    extrait: "De l'estimation confidentielle à la signature, ce qui distingue une vente de prestige d'une transaction classique.",
+    titre: 'Vendre son appartement à Marseille : les 5 erreurs à éviter',
+    extrait: "Prix mal positionné, photos négligées, diagnostics oubliés… Les pièges classiques qui font perdre du temps et de l'argent aux vendeurs, et comment les éviter.",
     photo: U('photo-1560518883-ce09059eeffa'),
+    sections: [
+      {
+        h: null,
+        p: [
+          "Vendre un bien immobilier paraît simple : une annonce, des visites, une signature. En réalité, chaque étape recèle des pièges qui peuvent coûter des semaines de délai — et parfois plusieurs milliers d'euros. Voici les cinq erreurs que nous voyons le plus souvent à Marseille, et comment les éviter.",
+        ],
+      },
+      {
+        h: '1. Surestimer le prix de départ',
+        p: [
+          "C'est l'erreur la plus fréquente, et la plus coûteuse. Un bien affiché trop cher ne génère pas de visites, s'installe dans les annonces, et finit par éveiller la méfiance : « pourquoi n'est-il toujours pas vendu ? ». Résultat paradoxal : les biens surestimés se vendent souvent moins cher, après plusieurs baisses successives, que s'ils avaient été positionnés juste dès le départ.",
+          "La parade : une estimation argumentée, fondée sur les ventes réellement conclues dans votre secteur — pas sur les prix affichés des annonces voisines, qui ne disent rien des prix réellement négociés.",
+        ],
+      },
+      {
+        h: '2. Négliger les photos et la présentation',
+        p: [
+          "Sur internet, votre bien a trois secondes pour convaincre. Des photos sombres, un intérieur encombré ou une annonce rédigée à la va-vite éliminent d'office une partie des acheteurs. Un rangement soigné, une lumière travaillée et des photos professionnelles peuvent transformer la perception d'un même appartement.",
+        ],
+      },
+      {
+        h: '3. Oublier les diagnostics et les documents',
+        p: [
+          "DPE, diagnostics techniques, procès-verbaux d'assemblée générale, montant des charges : les acheteurs — et leurs notaires — les demanderont tôt ou tard. Un dossier incomplet retarde la vente et fragilise la négociation. Préparez tout avant la mise en vente : c'est autant de temps gagné et de sérénité pour la suite.",
+        ],
+      },
+      {
+        h: '4. Mal gérer les visites',
+        p: [
+          "Enchaîner les visites sans filtre fait perdre du temps à tout le monde. Les visiteurs sérieux se reconnaissent à leur projet et à leur financement : qualifier les demandes en amont permet de concentrer l'énergie sur les vrais acquéreurs potentiels, et d'éviter que votre quotidien ne soit envahi pendant des mois.",
+        ],
+      },
+      {
+        h: '5. Rester seul face à la négociation',
+        p: [
+          "La négociation ne commence pas à l'offre : elle se joue dès le premier contact. Justifier son prix, répondre aux objections, sécuriser le financement de l'acheteur, tenir les délais jusqu'à la signature — c'est un métier. Un accompagnement professionnel protège votre prix et votre tranquillité.",
+          "Vous envisagez de vendre à Marseille ou dans ses environs ? Apimmo vous propose une estimation confidentielle et sans engagement, avec un avis de valeur écrit et documenté. Contactez-nous : la première conversation ne coûte rien et vous apprendra beaucoup.",
+        ],
+      },
+    ],
   },
   {
     id: 'a3',
+    slug: 'quartiers-marseille-ou-habiter',
     date: '9 mai 2026',
-    titre: 'Vivre au 7e : pourquoi le secteur Pharo–Malmousque séduit autant',
-    extrait: "Entre mer et centre-ville, portrait d'un arrondissement devenu l'adresse la plus convoitée de Marseille.",
-    photo: U('photo-1596394516093-501ba68a0ba6'),
+    titre: "Dans quel quartier de Marseille habiter ? Notre tour d'horizon",
+    extrait: "Du Vieux-Port à la Pointe Rouge, chaque quartier a son caractère, ses prix et son ambiance. Petit guide pour trouver celui qui vous correspond.",
+    photo: U('photo-1566838217578-1903568a76d9'),
+    sections: [
+      {
+        h: null,
+        p: [
+          "Marseille n'est pas une ville, c'est une mosaïque. 111 quartiers officiels, des ambiances qui changent d'une rue à l'autre, la mer d'un côté et les collines de l'autre. Choisir où habiter, c'est d'abord choisir un mode de vie. Voici notre lecture des grands secteurs, forgée par des années de terrain.",
+        ],
+      },
+      {
+        h: 'Le 7e : la mer au quotidien',
+        p: [
+          "Entre le Pharo, Endoume, Malmousque et le Roucas Blanc, le 7e arrondissement offre ce que peu de villes françaises peuvent proposer : vivre les pieds dans l'eau tout en restant à dix minutes du centre. Criques, cabanons, vallon des Auffes — le cadre est unique, et les prix parmi les plus élevés de la ville. C'est le secteur idéal pour qui place la qualité de vie et la mer au sommet de ses critères.",
+        ],
+      },
+      {
+        h: 'Le 8e : l\u2019équilibre familles et bord de mer',
+        p: [
+          "Du Prado à la Pointe Rouge en passant par Périer et Saint-Giniez, le 8e séduit les familles : écoles réputées, plages accessibles à pied ou à vélo, larges avenues et beaux immeubles. Le marché y est dynamique et les biens de qualité partent rapidement — mieux vaut être prêt quand la bonne adresse se présente.",
+        ],
+      },
+      {
+        h: 'Le centre : Vieux-Port, Chave, la Plaine',
+        p: [
+          "Le centre de Marseille vit une transformation profonde. Autour du Vieux-Port, du cours Julien, de la Plaine ou du boulevard Chave, une nouvelle génération d'habitants redonne vie aux beaux immeubles anciens. Les prix y restent accessibles au regard d'autres métropoles, avec un potentiel de valorisation réel pour qui sait choisir son immeuble — c'est là que l'accompagnement local prend tout son sens.",
+        ],
+      },
+      {
+        h: 'Les villages dans la ville : Saint-Barnabé, Mazargues, les Goudes',
+        p: [
+          "Marseille cache des villages : Saint-Barnabé et ses maisons de ville dans le 12e, Mazargues aux portes des calanques, les Goudes et leur bout du monde. On y trouve des maisons avec jardin, une vie de quartier authentique, et souvent un excellent compromis entre espace, budget et douceur de vivre.",
+        ],
+      },
+      {
+        h: 'Et le bon quartier pour vous ?',
+        p: [
+          "Il n'existe pas de meilleur quartier dans l'absolu — seulement celui qui correspond à votre vie : trajet quotidien, écoles, besoin de mer ou de calme, budget. C'est exactement la conversation que nous aimons avoir avec nos clients avant même de parler de biens.",
+          "Vous cherchez votre adresse à Marseille ? Passez nous voir rue du Capitaine Dessemond, ou confiez-nous votre recherche : nous connaissons chaque secteur, et souvent les biens avant qu'ils n'arrivent sur le marché.",
+        ],
+      },
+    ],
   },
 ];
 

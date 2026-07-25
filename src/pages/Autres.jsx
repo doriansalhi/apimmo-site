@@ -5,7 +5,7 @@ import { useBiens } from '../data/biens';
 
 const U = (id, w = 1800) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 
-function PageHero({ title, sub = 'Apimmo — Votre agence immobilière', img }) {
+function PageHero({ title, sub = 'Apimmo — Immobilier de prestige', img }) {
   return (
     <section className="page-hero" style={{ backgroundImage: `url(${img})` }}>
       <div className="ph-inner">
@@ -203,6 +203,19 @@ export function Agence() {
           ))}
         </div>
       </section>
+
+      <section className="section" id="rejoindre">
+        <div className="container" style={{ textAlign: 'center' }}>
+          <SectionHead title="Nous rejoindre" italic sub="Recrutement" />
+          <Reveal>
+            <p style={{ maxWidth: 660, margin: '0 auto 30px', color: 'var(--smoke)' }}>
+              Apimmo grandit et recherche des consultants qui partagent notre exigence : culture du service,
+              discrétion, goût des belles choses. Envoyez-nous votre parcours — nous lisons chaque candidature.
+            </p>
+            <a href={`mailto:${AGENCE.email}?subject=Candidature%20Apimmo`} className="btn btn--solid">Envoyer ma candidature</a>
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }
@@ -211,12 +224,12 @@ export function Agence() {
 export function Actualites() {
   return (
     <>
-      <PageHero title="Actualités" sub="Le marché, nos conseils, la vie de l'agence" img={U('photo-1449824913935-59a10b8d2000')} />
+      <PageHero title="Actualités" sub="Le marché, nos conseils, la vie de l'agence" img={U('photo-1566838217578-1903568a76d9')} />
       <section className="section">
         <div className="container post-list">
           {ACTUS.map((a, i) => (
             <Reveal key={a.id} delay={(i % 2) + 1}>
-              <article className="post-item">
+              <Link to={`/actualites/${a.slug}`} className="post-item" style={{ display: 'grid' }}>
                 <div className="pi-media"><img src={a.photo} alt="" loading="lazy" /></div>
                 <div>
                   <span className="eyebrow" style={{ marginBottom: 6 }}>{a.date}</span>
@@ -224,7 +237,7 @@ export function Actualites() {
                   <p>{a.extrait}</p>
                   <span className="link-gold">Lire l'article</span>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>

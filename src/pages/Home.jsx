@@ -175,7 +175,7 @@ export default function Home() {
           <div className="news-grid">
             {ACTUS.map((a, i) => (
               <Reveal key={a.id} delay={i + 1}>
-                <Link to="/actualites" className="news-card">
+                <Link to={`/actualites/${a.slug}`} className="news-card">
                   <div className="nc-media"><img src={a.photo} alt="" loading="lazy" /></div>
                   <div className="nc-body">
                     <span className="date">{a.date}</span>

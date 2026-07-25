@@ -7,6 +7,7 @@ import Acheter from './pages/Acheter';
 import Louer from './pages/Louer';
 import BienDetail from './pages/BienDetail';
 import { GestionLocative, Estimer, BiensVendus, Agence, Actualites, Contact } from './pages/Autres';
+import Article from './pages/Article';
 import Admin from './pages/Admin';
 import { AuthProvider } from './lib/auth';
 
@@ -75,6 +76,7 @@ function PublicSite() {
           <Route path="/biens-vendus" element={<BiensVendus />} />
           <Route path="/agence" element={<Agence />} />
           <Route path="/actualites" element={<Actualites />} />
+          <Route path="/actualites/:slug" element={<Article />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
         </Routes>
