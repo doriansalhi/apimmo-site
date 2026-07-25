@@ -714,12 +714,12 @@ button { font-family: inherit; cursor: pointer; }
   .detail-main .eyebrow { line-height: 1.8; }
 }
 /* ===== Correctifs menu burger mobile ===== */
-
 /* plus d'espace en haut : le 1er lien n'est plus coupé sous le header */
 .mobile-nav {
-  padding: 150px 8% 60px;
+  padding: 110px 8% 60px;
 }
-
+/* croix de fermeture toujours visible quand le menu est ouvert */
+.burger.open span { background: var(--navy) !important; }
 /* liens un peu plus compacts pour tout voir sans trop scroller */
 .mobile-nav a {
   font-size: 22px;
@@ -728,7 +728,6 @@ button { font-family: inherit; cursor: pointer; }
 .mobile-nav .mn-sub {
   font-size: 13px;
 }
-
 /* le bloc téléphone / email en bas : style discret, sans bordures */
 .mobile-nav .mn-contact {
   margin-top: 34px;
