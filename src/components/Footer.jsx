@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container footer-main">
         <div>
           <div className="f-logo">Apimmo</div>
-          <div className="f-base">Immobilier de prestige</div>
+          <div className="f-base">Votre agence immobilière</div>
           <ul>
             <li>{AGENCE.adresse}</li>
             <li><a href={AGENCE.telHref}>{AGENCE.tel}</a></li>
@@ -55,7 +55,7 @@ export default function Footer() {
 
       <div className="footer-seo">
         <div className="container">
-          <strong>Apimmo, agence immobilière de prestige à Marseille.</strong> Installée rue du Capitaine Dessemond,
+        <strong>Apimmo, votre agence immobilière à Marseille.</strong> Installée rue du Capitaine Dessemond,
           au cœur du 7e arrondissement, notre agence accompagne l'achat, la vente et l'estimation de biens
           d'exception : villas vue mer, appartements bourgeois, bastides et propriétés de caractère. Nous intervenons
           notamment à {COMMUNES.join(' · ')}.

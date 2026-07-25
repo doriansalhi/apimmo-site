@@ -5,7 +5,7 @@ import { useBiens } from '../data/biens';
 
 const U = (id, w = 1800) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 
-function PageHero({ title, sub = 'Apimmo — Immobilier de prestige', img }) {
+function PageHero({ title, sub = 'Apimmo — Votre agence immobilière', img }) {
   return (
     <section className="page-hero" style={{ backgroundImage: `url(${img})` }}>
       <div className="ph-inner">
