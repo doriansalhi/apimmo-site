@@ -107,7 +107,7 @@ export default function BienDetail() {
                 <div className="form-ok" style={{ padding: '20px 0' }}>
                   <div className="tick">✦</div>
                   <h3 style={{ fontSize: 20 }}>Message envoyé</h3>
-                  <p>Nous revenons vers vous très rapidement.</p>
+                  <p>Merci pour votre confiance, nous vous recontacterons dans 24 heures.</p>
                 </div>
               ) : (
                 <form

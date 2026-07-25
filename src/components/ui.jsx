@@ -141,7 +141,7 @@ export function EstimationForm() {
       <div className="form-ok">
         <div className="tick">✦</div>
         <h3>Demande envoyée</h3>
-        <p>Nous vous recontactons sous 24 h pour convenir d'un rendez-vous d'estimation confidentiel.</p>
+        <p>Merci pour votre confiance, nous vous recontacterons dans 24 heures.</p>
       </div>
     );
   return (
