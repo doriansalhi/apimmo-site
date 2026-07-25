@@ -77,12 +77,13 @@ export default function Home() {
           <SectionHead title="Nos derniers biens" />
           <Reveal>
           <Swiper
-            modules={[Autoplay]}
-            autoplay={{ delay: 2600 }}
-            loop
-            spaceBetween={64}
-            slidesPerView="auto"
-            centeredSlides
+            className="props-swiper"
+            modules={[Pagination, Autoplay]}
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 4500, disableOnInteraction: true }}
+            spaceBetween={20}
+            slidesPerView={2}
+            breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
           >
               {derniers.map((b) => (
                 <SwiperSlide key={b.id} style={{ height: 'auto' }}>

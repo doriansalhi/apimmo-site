@@ -740,3 +740,32 @@ button { font-family: inherit; cursor: pointer; }
   padding: 0;
   color: var(--smoke);
 }
+/* ===== Or plus lisible sur fond clair ===== */
+
+/* on fonce la couleur or globale (textes, prix, dates, eyebrows…) */
+:root {
+  --gold: #8f6f3d;
+}
+
+/* mais sur les fonds sombres, on garde un or clair qui ressort */
+.hero-content .eyebrow { color: #c9a870; }
+.counter .val span { color: #c9a870; }
+.page-hero .ph-sub { color: #c9a870; }
+.network .eyebrow { color: #c9a870; }
+.topbar a:hover { color: #c9a870; }
+.footer h4, .footer .f-base { color: #c9a870; }
+.footer a:hover { color: #c9a870; }
+/* ===== Biens : 2 cartes par ligne sur mobile ===== */
+@media (max-width: 580px) {
+  .props-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  /* on compacte les cartes pour que 2 tiennent lisiblement */
+  .prop-body { padding: 8px 12px 16px; }
+  .prop-body h3 { font-size: 16px; }
+  .prop-body .price { font-size: 15px; }
+  .prop-body p { font-size: 13px; }
+  .prop-meta { padding: 10px 12px 0; font-size: 10px; }
+  .badge { font-size: 9px; padding: 5px 8px; }
+}
