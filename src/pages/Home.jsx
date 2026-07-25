@@ -11,14 +11,14 @@ import { AGENCE, HERO_SLIDES, EQUIPE, ACTUS, } from '../data/data';
 import { useBiens } from '../data/biens';
 const U = (id, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 
-const NUMGRID = [
-  { to: '/acheter', label: 'Acheter', img: U('photo-1600585154340-be6161a56a0c', 900) },
-  { to: '/gestion-locative', label: 'Gestion locative', img: U('photo-1560184897-ae75f418493e', 900) },
-  { to: '/estimer', label: 'Estimer / Vendre', img: U('photo-1560518883-ce09059eeffa', 900) },
-  { to: '/biens-vendus', label: 'Biens vendus', img: U('photo-1605276374104-dee2a0ed3cd6', 900) },
-  { to: '/agence', label: "L'agence", img: U('photo-1497366216548-37526070297c', 900) },
-  { to: '/actualites', label: 'Vivre en Provence', img: U('photo-1596394516093-501ba68a0ba6', 900) },
-];
+  const NUMGRID = [
+    { to: '/acheter', label: 'Acheter', img: U('photo-1600585154340-be6161a56a0c', 900) },
+    { to: '/louer', label: 'Louer', img: U('photo-1502672260266-1c1ef2d93688', 900) },
+    { to: '/gestion-locative', label: 'Gestion locative', img: U('photo-1560184897-ae75f418493e', 900) },
+    { to: '/estimer', label: 'Estimer / Vendre', img: U('photo-1560518883-ce09059eeffa', 900) },
+    { to: '/biens-vendus', label: 'Biens vendus', img: U('photo-1605276374104-dee2a0ed3cd6', 900) },
+    { to: '/agence', label: "L'agence", img: U('photo-1497366216548-37526070297c', 900) },
+  ];
 
 export default function Home() {
   const [newsSent, setNewsSent] = useState(false);
