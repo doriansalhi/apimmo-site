@@ -125,9 +125,9 @@ function BienForm({ initial, onDone, onCancel }) {
             <option value="location">Location</option>
           </select>
         </div>
-        <div className="field"><label>{isLocation ? 'Loyer (€/mois CC) *' : 'Prix (€) *'}</label><input type="number" required value={b.prix} onChange={set('prix')} placeholder={isLocation ? '1850' : '2450000'} /></div>
-        <div className="field"><label>Surface (m²)</label><input type="number" value={b.surface} onChange={set('surface')} /></div>
-        <div className="field"><label>Chambres</label><input type="number" value={b.chambres} onChange={set('chambres')} /></div>
+        <div className="field"><label>{isLocation ? 'Loyer (€/mois CC) *' : 'Prix (€) *'}</label><input type="number" min="0" required value={b.prix} onChange={set('prix')} placeholder={isLocation ? '1850' : '2450000'} /></div>
+        <div className="field"><label>Surface (m²)</label><input type="number" min="0" value={b.surface} onChange={set('surface')} /></div>
+        <div className="field"><label>Chambres</label><input type="number" min="0" value={b.chambres} onChange={set('chambres')} /></div>
         <div className="field"><label>Type</label>
           <select value={b.type} onChange={set('type')}><option>Appartement</option><option>Maison</option><option>Autre</option></select>
         </div>

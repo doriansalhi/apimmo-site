@@ -696,3 +696,20 @@ button { font-family: inherit; cursor: pointer; }
   top: 0.70em;
   line-height: 1;
 }
+/* ===== Correctifs mobile fiche bien ===== */
+
+/* le texte sans espaces (ou très long) ne déborde plus de l'écran */
+.detail-main, .prop-body, .nc-body, .post-item {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 860px) {
+  /* galerie plus haute sur mobile (16/8.5 était trop écrasé) */
+  .detail-gallery .main-swiper { aspect-ratio: 4 / 3; }
+
+  /* prix et libellé qui respirent */
+  .detail-main .d-price { font-size: 22px; }
+
+  /* l'eyebrow (ville · réf · badge) passe à la ligne proprement */
+  .detail-main .eyebrow { line-height: 1.8; }
+}
