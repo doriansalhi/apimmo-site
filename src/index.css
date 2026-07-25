@@ -713,3 +713,31 @@ button { font-family: inherit; cursor: pointer; }
   /* l'eyebrow (ville · réf · badge) passe à la ligne proprement */
   .detail-main .eyebrow { line-height: 1.8; }
 }
+/* ===== Correctifs menu burger mobile ===== */
+
+/* plus d'espace en haut : le 1er lien n'est plus coupé sous le header */
+.mobile-nav {
+  padding: 150px 8% 60px;
+}
+
+/* liens un peu plus compacts pour tout voir sans trop scroller */
+.mobile-nav a {
+  font-size: 22px;
+  padding: 11px 0;
+}
+.mobile-nav .mn-sub {
+  font-size: 13px;
+}
+
+/* le bloc téléphone / email en bas : style discret, sans bordures */
+.mobile-nav .mn-contact {
+  margin-top: 34px;
+}
+.mobile-nav .mn-contact a {
+  display: inline;
+  font-family: var(--sans);
+  font-size: 16px;
+  border-bottom: none;
+  padding: 0;
+  color: var(--smoke);
+}
