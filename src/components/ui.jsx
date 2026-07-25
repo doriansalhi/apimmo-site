@@ -83,6 +83,7 @@ export function SectionHead({ title, italic = false, sub = 'Apimmo — Immobilie
 
 /* ---------- Carte bien ---------- */
 export function PropertyCard({ bien }) {
+  const isLocation = bien.transaction === 'location';
   return (
     <article className="prop-card">
       <Link to={`/bien/${bien.id}`} className="prop-media" aria-label={bien.titre}>
@@ -98,7 +99,10 @@ export function PropertyCard({ bien }) {
       </div>
       <div className="prop-body">
         <h3>{bien.titre}</h3>
-        <div className="price">{fmtPrix(bien.prix)}</div>
+        <div className="price">
+          {fmtPrix(bien.prix)}
+          {isLocation && <span style={{ fontSize: 13, color: 'var(--smoke)' }}> / mois CC</span>}
+        </div>
         <p>{bien.extrait}</p>
         <Link to={`/bien/${bien.id}`} className="link-gold">En savoir plus</Link>
       </div>

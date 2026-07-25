@@ -5,7 +5,8 @@ import { AGENCE } from '../data/data';
 const links = [
   { to: '/', label: 'Accueil', end: true },
   { to: '/acheter', label: 'Acheter' },
-  { to: '/programmes-neufs', label: 'Programmes neufs' },
+  { to: '/louer', label: 'Louer' },
+  { to: '/gestion-locative', label: 'Gestion locative' },
   { to: '/estimer', label: 'Estimer / Vendre' },
   { to: '/biens-vendus', label: 'Biens vendus' },
 ];
@@ -13,7 +14,6 @@ const links = [
 const agenceLinks = [
   { to: '/agence', label: 'Notre histoire' },
   { to: '/agence#equipe', label: 'Notre équipe' },
-  { to: '/agence#rejoindre', label: 'Nous rejoindre' },
 ];
 
 export default function Header() {
@@ -43,9 +43,9 @@ export default function Header() {
 
       <header className={`header${overHero ? ' over-hero' : ''}${scrolled ? ' scrolled' : ''}`}>
         <div className="container">
-          <Link to="/" className="logo" aria-label="Apimmo — accueil">
-            <span className="logo-name">Apimmo</span>
-            <span className="logo-base"></span>
+        <Link to="/" className="logo" aria-label="Apimmo — accueil">
+            <img src="/logo-marine-transparent.png" alt="Apimmo Immobilier" className="logo-img logo-img--marine" />
+            <img src="/logo-blanc-transparent.png" alt="" aria-hidden="true" className="logo-img logo-img--blanc" />
           </Link>
 
           <nav aria-label="Navigation principale">

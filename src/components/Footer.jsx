@@ -30,7 +30,7 @@ export default function Footer() {
           <ul>
             <li><Link to="/acheter">Acheter un bien</Link></li>
             <li><Link to="/estimer">Vendre / Estimer</Link></li>
-            <li><Link to="/programmes-neufs">Programmes neufs</Link></li>
+            <li><Link to="/gestion-locative">Gestion locative</Link></li>
             <li><Link to="/biens-vendus">Biens vendus</Link></li>
             <li><Link to="/agence">L'agence</Link></li>
             <li><Link to="/actualites">Actualités</Link></li>

@@ -606,3 +606,93 @@ button { font-family: inherit; cursor: pointer; }
   .footer-main { grid-template-columns: 1fr; }
   .hero-cta .btn { width: 100%; text-align: center; }
 }
+.logo-img { height: 60px; width: auto; display: block; }
+.logo-img--blanc { display: none; }
+.header.over-hero:not(.scrolled) .logo-img--marine { display: none; }
+.header.over-hero:not(.scrolled) .logo-img--blanc { display: block; }
+@media (max-width: 860px) { .logo-img { height: 48px; } }
+/* ===== Ajustements header / logo ===== */
+
+/* header un peu plus haut pour accueillir le logo agrandi */
+.header .container {
+  height: 100px;
+  width: min(1360px, 96%);
+}
+
+/* 1. logo plus grand */
+.logo-img { height: 84px; }
+
+/* 2. logo décalé vers la droite */
+.logo { margin-left: 36px; }
+
+/* 3. libellés sur une seule ligne + espacement identique partout */
+.nav { gap: 28px; }
+.nav a, .nav .nav-btn { white-space: nowrap; font-size: 11px; }
+
+/* le menu passe en burger plus tôt (sinon il déborde sur écran moyen) */
+@media (max-width: 1280px) {
+  .nav { display: none; }
+  .burger { display: block; }
+}
+@media (max-width: 860px) {
+  .logo-img { height: 56px; }
+  .logo { margin-left: 0; }
+}
+/* ===== Partenaires : largeur naturelle, plus de chevauchement ===== */
+.partners .swiper-slide { width: auto; }
+.partner-logo { padding: 0 4px; }
+      <section className="section" id="rejoindre">
+/* ===== Textes courants +2px (paragraphes et listes uniquement) ===== */
+
+/* paragraphe d'intro des pages (Estimer, Agence…) */
+.about-text p { font-size: 22.5px; }
+
+/* listes à puces ✦ (Estimer, Agence) */
+.about-vals li { font-size: 21.5px; }
+
+/* descriptions des cartes (biens, gestion locative, actus) */
+.prop-body p { font-size: 20.5px; }
+.nc-body p { font-size: 20.5px; }
+
+/* biographies équipe */
+.team-info p { font-size: 21.5px; }
+
+/* section sombre réseau/compteurs */
+.network p { font-size: 21.5px; }
+
+/* description longue des fiches biens */
+.detail-main .desc p { font-size: 22.5px; }
+
+/* articles actualités */
+.post-item p { font-size: 20px; }
+
+/* paragraphes de la page Contact */
+.contact-info p { font-size: 21.5px; }
+/* ===== Séparateur ✦ parfaitement centré ===== */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 22px auto 0;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  display: block;
+  width: 54px;
+  height: 1px;
+  background: var(--gold-soft);
+  margin: 0;
+}
+/* ===== Puces ✦ des listes alignées avec le texte agrandi ===== */
+.about-vals li {
+  padding-left: 32px;
+}
+.about-vals li::before {
+  font-size: 14px;
+  top: 0.70em;
+  line-height: 1;
+}

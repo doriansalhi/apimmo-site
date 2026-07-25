@@ -5,16 +5,24 @@ import { EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import { Reveal } from '../components/ui';
-import { BIENS, fmtPrix, AGENCE } from '../data/data';
+import { fmtPrix, AGENCE } from '../data/data';
+import { useBien } from '../data/biens';
 
 const DPE_COLORS = { A: '#1d9d4b', B: '#4fb548', C: '#b6ce3a', D: '#f2e21c', E: '#eba63b', F: '#e2732b', G: '#d02e26' };
 
 export default function BienDetail() {
   const { id } = useParams();
-  const bien = BIENS.find((b) => b.id === id);
+  const { bien, loading } = useBien(id);
   const swiperRef = useRef(null);
   const [active, setActive] = useState(0);
   const [sent, setSent] = useState(false);
+
+  if (loading)
+    return (
+      <section className="section container" style={{ minHeight: '50vh' }}>
+        <p style={{ color: 'var(--smoke)' }}>Chargement…</p>
+      </section>
+    );
 
   if (!bien)
     return (
@@ -23,6 +31,8 @@ export default function BienDetail() {
         <Link to="/acheter" className="btn">Voir tous les biens</Link>
       </section>
     );
+
+  const isLocation = bien.transaction === 'location';
 
   return (
     <>
@@ -57,9 +67,14 @@ export default function BienDetail() {
 
           <div className="detail-layout">
             <div className="detail-main">
-              <span className="eyebrow">{bien.ville} · Réf. {bien.ref} {bien.badge ? `· ${bien.badge}` : ''}</span>
+              <span className="eyebrow">{bien.ville} · Réf. {bien.ref} {bien.badge ? `· ${bien.badge}` : ''} {isLocation ? '· Location' : ''}</span>
               <h1>{bien.titre}</h1>
-              <div className="d-price">{fmtPrix(bien.prix)} <span style={{ fontSize: 13, color: 'var(--smoke)' }}>honoraires charge vendeur</span></div>
+              <div className="d-price">
+                {fmtPrix(bien.prix)}
+                {isLocation
+                  ? <span style={{ fontSize: 15, color: 'var(--smoke)' }}> / mois charges comprises</span>
+                  : <span style={{ fontSize: 13, color: 'var(--smoke)' }}> honoraires charge vendeur</span>}
+              </div>
 
               <div className="d-features">
                 <div className="d-feat"><div className="v">{bien.surface}</div><div className="l">m² habitables</div></div>
@@ -115,7 +130,7 @@ export default function BienDetail() {
           </div>
 
           <Reveal style={{ textAlign: 'center', marginTop: 70 }}>
-            <Link to="/acheter" className="link-gold">← Retour à tous les biens</Link>
+            <Link to={isLocation ? '/louer' : '/acheter'} className="link-gold">← Retour à tous les biens</Link>
           </Reveal>
         </div>
       </section>

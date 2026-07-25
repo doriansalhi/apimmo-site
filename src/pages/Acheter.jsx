@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Reveal, PropertyCard, SectionHead } from '../components/ui';
-import { BIENS } from '../data/data';
+import { useBiens } from '../data/biens';
 
 const HERO = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80';
 
@@ -9,12 +9,13 @@ const initial = { type: '', ville: '', min: '', max: '', chambres: '' };
 export default function Acheter() {
   const [f, setF] = useState(initial);
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
+  const { biens, loading } = useBiens('disponible', 'vente');
 
-  const villes = useMemo(() => [...new Set(BIENS.map((b) => b.ville))], []);
+  const villes = useMemo(() => [...new Set(biens.map((b) => b.ville))].filter(Boolean), [biens]);
 
   const results = useMemo(
     () =>
-      BIENS.filter(
+      biens.filter(
         (b) =>
           (!f.type || b.type === f.type) &&
           (!f.ville || b.ville === f.ville) &&
@@ -22,7 +23,7 @@ export default function Acheter() {
           (!f.max || b.prix <= Number(f.max)) &&
           (!f.chambres || b.chambres >= Number(f.chambres))
       ),
-    [f]
+    [f, biens]
   );
 
   return (
@@ -73,7 +74,9 @@ export default function Acheter() {
             <button type="button" className="btn" onClick={() => setF(initial)}>Réinitialiser</button>
           </form>
 
-          {results.length === 0 ? (
+          {loading ? (
+            <p className="no-results" style={{ fontStyle: 'normal' }}>Chargement des biens…</p>
+          ) : results.length === 0 ? (
             <p className="no-results">Aucun bien ne correspond à votre recherche — confiez-nous votre projet, nous chercherons pour vous.</p>
           ) : (
             <div className="props-grid">

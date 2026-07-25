@@ -4,21 +4,28 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Acheter from './pages/Acheter';
+import Louer from './pages/Louer';
 import BienDetail from './pages/BienDetail';
-import { ProgrammesNeufs, Estimer, BiensVendus, Agence, Actualites, Contact } from './pages/Autres';
+import { GestionLocative, Estimer, BiensVendus, Agence, Actualites, Contact } from './pages/Autres';
+import Admin from './pages/Admin';
+import { AuthProvider } from './lib/auth';
 
 const META = {
   '/': {
-    title: 'Apimmo — Votre Agence immobilière à Marseille ',
-    desc: "Apimmo, agence immobilière à Marseille. Achat, vente et estimation de biens d'exception : villas vue mer, appartements bourgeois, bastides.",
+    title: 'Apimmo — Agence immobilière de prestige à Marseille',
+    desc: "Apimmo, agence immobilière de prestige à Marseille. Achat, vente et estimation de biens d'exception : villas vue mer, appartements bourgeois, bastides.",
   },
   '/acheter': {
     title: "Acheter un bien d'exception à Marseille | Apimmo",
-    desc: "Villas, appartements et propriétés de caractère à vendre à Marseille et sur le littoral. Sélection Apimmo.",
+    desc: "Villas, appartements de prestige et propriétés de caractère à vendre à Marseille et sur le littoral. Sélection Apimmo.",
   },
-  '/programmes-neufs': {
-    title: 'Programmes neufs à Marseille | Apimmo',
-    desc: "Résidences neuves haut de gamme à Marseille et Cassis : appartements et villas, sélectionnés par Apimmo.",
+  '/louer': {
+    title: "Louer un bien d'exception à Marseille | Apimmo",
+    desc: "Appartements et maisons de prestige à louer à Marseille et sur le littoral. Locations sélectionnées par Apimmo.",
+  },
+  '/gestion-locative': {
+    title: 'Gestion locative à Marseille | Apimmo',
+    desc: "Confiez la gestion locative de votre bien à Apimmo : mise en location, gestion complète, garanties loyers impayés. Étude gratuite et sans engagement.",
   },
   '/estimer': {
     title: 'Estimation confidentielle de votre bien | Apimmo Marseille',
@@ -26,14 +33,14 @@ const META = {
   },
   '/biens-vendus': {
     title: 'Biens vendus | Apimmo Marseille',
-    desc: 'Nos dernières ventes  à Marseille et alentours. Votre bien pourrait être le prochain.',
+    desc: 'Nos dernières ventes de prestige à Marseille et alentours. Votre bien pourrait être le prochain.',
   },
   '/agence': {
     title: "L'agence Apimmo — Notre histoire et notre équipe",
-    desc: "Découvrez Apimmo : une agence marseillaise indépendante dédiée à l'immobilier , rue du Capitaine Dessemond.",
+    desc: "Découvrez Apimmo : une agence marseillaise indépendante dédiée à l'immobilier de prestige, rue du Capitaine Dessemond.",
   },
   '/actualites': {
-    title: 'Actualités du marché immobilier  | Apimmo',
+    title: 'Actualités du marché immobilier de prestige | Apimmo',
     desc: 'Analyses de marché, conseils vendeurs et acquéreurs, vie de l’agence : les actualités Apimmo.',
   },
   '/contact': {
@@ -52,17 +59,18 @@ function Meta() {
   return null;
 }
 
-export default function App() {
+function PublicSite() {
   return (
     <>
-      <Meta />
       <Header />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/acheter" element={<Acheter />} />
+          <Route path="/louer" element={<Louer />} />
           <Route path="/bien/:id" element={<BienDetail />} />
-          <Route path="/programmes-neufs" element={<ProgrammesNeufs />} />
+          <Route path="/gestion-locative" element={<GestionLocative />} />
+          <Route path="/programmes-neufs" element={<GestionLocative />} />
           <Route path="/estimer" element={<Estimer />} />
           <Route path="/biens-vendus" element={<BiensVendus />} />
           <Route path="/agence" element={<Agence />} />
@@ -73,5 +81,17 @@ export default function App() {
       </main>
       <Footer />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <Meta />
+      <Routes>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/*" element={<PublicSite />} />
+      </Routes>
+    </AuthProvider>
   );
 }

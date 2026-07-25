@@ -1,3 +1,4 @@
+import TrustindexReviews from '../components/TrustindexReviews';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,13 +7,13 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import { Reveal, Counter, SectionHead, PropertyCard, EstimationForm } from '../components/ui';
-import { AGENCE, HERO_SLIDES, BIENS, EQUIPE, ACTUS, AVIS, PARTENAIRES } from '../data/data';
-
+import { AGENCE, HERO_SLIDES, EQUIPE, ACTUS, } from '../data/data';
+import { useBiens } from '../data/biens';
 const U = (id, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 
 const NUMGRID = [
   { to: '/acheter', label: 'Acheter', img: U('photo-1600585154340-be6161a56a0c', 900) },
-  { to: '/programmes-neufs', label: 'Programmes neufs', img: U('photo-1545324418-cc1a3fa10c00', 900) },
+  { to: '/gestion-locative', label: 'Gestion locative', img: U('photo-1560184897-ae75f418493e', 900) },
   { to: '/estimer', label: 'Estimer / Vendre', img: U('photo-1560518883-ce09059eeffa', 900) },
   { to: '/biens-vendus', label: 'Biens vendus', img: U('photo-1605276374104-dee2a0ed3cd6', 900) },
   { to: '/agence', label: "L'agence", img: U('photo-1497366216548-37526070297c', 900) },
@@ -21,7 +22,8 @@ const NUMGRID = [
 
 export default function Home() {
   const [newsSent, setNewsSent] = useState(false);
-
+  const { biens } = useBiens('disponible');
+  const derniers = biens.slice(0, 8);
   return (
     <>
       {/* 1 — HERO plein écran */}
@@ -74,16 +76,15 @@ export default function Home() {
         <div className="container">
           <SectionHead title="Nos derniers biens" />
           <Reveal>
-            <Swiper
-              className="props-swiper"
-              modules={[Pagination, Autoplay]}
-              pagination={{ clickable: true }}
-              autoplay={{ delay: 4500, disableOnInteraction: true }}
-              spaceBetween={30}
-              slidesPerView={1}
-              breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
-            >
-              {BIENS.map((b) => (
+          <Swiper
+            modules={[Autoplay]}
+            autoplay={{ delay: 2600 }}
+            loop
+            spaceBetween={64}
+            slidesPerView="auto"
+            centeredSlides
+          >
+              {derniers.map((b) => (
                 <SwiperSlide key={b.id} style={{ height: 'auto' }}>
                   <PropertyCard bien={b} />
                 </SwiperSlide>
@@ -213,25 +214,7 @@ export default function Home() {
         <div className="container">
           <SectionHead title="Des mots qui comptent" italic />
           <Reveal>
-            <Swiper
-              className="reviews-swiper"
-              modules={[Pagination, Autoplay]}
-              pagination={{ clickable: true }}
-              autoplay={{ delay: 6000 }}
-              loop
-              speed={900}
-            >
-              {AVIS.map((a) => (
-                <SwiperSlide key={a.qui}>
-                  <div className="review">
-                    <div className="stars" aria-label="5 étoiles sur 5">★★★★★</div>
-                    <blockquote>« {a.texte} »</blockquote>
-                    <div className="who">{a.qui}</div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div className="widget-slot">Emplacement widget avis — Google Reviews / Trustindex</div>
+            <TrustindexReviews />
           </Reveal>
         </div>
       </section>
@@ -246,25 +229,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10 — Partenaires */}
-      <section className="partners">
-        <div className="container">
-          <Swiper
-            modules={[Autoplay]}
-            autoplay={{ delay: 2600 }}
-            loop
-            spaceBetween={40}
-            slidesPerView={2}
-            breakpoints={{ 640: { slidesPerView: 3 }, 1024: { slidesPerView: 5 } }}
-          >
-            {PARTENAIRES.map((p) => (
-              <SwiperSlide key={p}>
-                <div className="partner-logo"><em>✦</em> {p}</div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
+      
 
       {/* 11 — Contact & Newsletter */}
       <section className="section" id="newsletter">

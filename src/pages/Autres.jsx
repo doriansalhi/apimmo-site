@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Reveal, SectionHead, EstimationForm } from '../components/ui';
-import { PROGRAMMES, VENDUS, EQUIPE, ACTUS, AGENCE, COMMUNES } from '../data/data';
+import { EQUIPE, ACTUS, AGENCE, COMMUNES } from '../data/data';
+import { useBiens } from '../data/biens';
 
 const U = (id, w = 1800) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 
@@ -15,25 +16,40 @@ function PageHero({ title, sub = 'Apimmo — Immobilier de prestige', img }) {
   );
 }
 
-/* ============ PROGRAMMES NEUFS ============ */
-export function ProgrammesNeufs() {
+/* ============ GESTION LOCATIVE ============ */
+const GL_SERVICES = [
+  {
+    titre: 'Mise en location',
+    photo: U('photo-1560518883-ce09059eeffa', 900),
+    texte: "Estimation du loyer de marché, photographies professionnelles, diffusion ciblée et visites qualifiées : nous sélectionnons pour vous des locataires solides, dossiers vérifiés à l'appui.",
+  },
+  {
+    titre: 'Gestion complète',
+    photo: U('photo-1497366811353-6870744d04b2', 900),
+    texte: "Quittances, encaissement des loyers, révision annuelle, régularisation des charges, coordination des interventions : nous administrons votre bien comme s'il était le nôtre. Vous ne vous occupez de rien.",
+  },
+  {
+    titre: 'Sérénité & garanties',
+    photo: U('photo-1554224155-6726b3ff858f', 900),
+    texte: "Garantie loyers impayés, protection juridique, états des lieux détaillés et suivi rigoureux de l'entretien : votre patrimoine est protégé, sa valeur préservée dans la durée.",
+  },
+];
+
+export function GestionLocative() {
   return (
     <>
-      <PageHero title="Programmes neufs" img={U('photo-1545324418-cc1a3fa10c00')} />
+      <PageHero title="Gestion locative" sub="Votre bien entre de bonnes mains" img={U('photo-1560184897-ae75f418493e')} />
       <section className="section">
         <div className="container">
-          <SectionHead title="Le neuf, avec la même exigence" />
+          <SectionHead title="Confiez, nous veillons" />
           <div className="news-grid">
-            {PROGRAMMES.map((p, i) => (
-              <Reveal key={p.id} delay={i + 1}>
+            {GL_SERVICES.map((s, i) => (
+              <Reveal key={s.titre} delay={i + 1}>
                 <article className="news-card">
-                  <div className="nc-media"><img src={p.photo} alt={p.titre} loading="lazy" /></div>
+                  <div className="nc-media"><img src={s.photo} alt={s.titre} loading="lazy" /></div>
                   <div className="nc-body">
-                    <span className="date">{p.ville}</span>
-                    <h3>{p.titre}</h3>
-                    <p>{p.extrait}</p>
-                    <p style={{ color: 'var(--gold)', fontWeight: 500, marginTop: 12 }}>{p.prix}</p>
-                    <Link to="/contact" className="link-gold" style={{ marginTop: 14, display: 'inline-block' }}>Recevoir la plaquette</Link>
+                    <h3>{s.titre}</h3>
+                    <p>{s.texte}</p>
                   </div>
                 </article>
               </Reveal>
@@ -43,13 +59,14 @@ export function ProgrammesNeufs() {
       </section>
       <section className="section section--off">
         <div className="container" style={{ textAlign: 'center' }}>
-          <SectionHead title="Investir dans le neuf" italic sub="Conseil & accompagnement" />
+          <SectionHead title="Un interlocuteur unique, un patrimoine préservé" italic sub="Gestion sur mesure" />
           <Reveal>
             <p style={{ maxWidth: 680, margin: '0 auto 30px', color: 'var(--smoke)' }}>
-              Frais de notaire réduits, garanties constructeur, dispositifs fiscaux : nos consultants vous
-              guident dans le choix du programme et du lot le plus adapté à votre projet patrimonial.
+              Chaque propriétaire bénéficie d'un consultant dédié, d'un reporting régulier et d'une totale
+              transparence sur les honoraires. Confiez-nous votre bien : nous vous présentons notre mandat
+              de gestion lors d'un rendez-vous sans engagement.
             </p>
-            <Link to="/contact" className="btn btn--solid">Prendre rendez-vous</Link>
+            <Link to="/contact" className="btn btn--solid">Demander une étude gratuite</Link>
           </Reveal>
         </div>
       </section>
@@ -97,18 +114,24 @@ export function Estimer() {
 
 /* ============ BIENS VENDUS ============ */
 export function BiensVendus() {
+  const { biens, loading } = useBiens('vendu');
   return (
     <>
       <PageHero title="Biens vendus" sub="Ils nous ont fait confiance" img={U('photo-1605276374104-dee2a0ed3cd6')} />
       <section className="section">
         <div className="container">
           <SectionHead title="Nos dernières ventes" />
+          {loading ? (
+            <p className="no-results" style={{ fontStyle: 'normal' }}>Chargement…</p>
+          ) : biens.length === 0 ? (
+            <p className="no-results">Nos ventes récentes seront bientôt présentées ici.</p>
+          ) : (
           <div className="props-grid">
-            {VENDUS.map((v, i) => (
+            {biens.map((v, i) => (
               <Reveal key={v.id} delay={(i % 3) + 1}>
                 <article className="prop-card sold-card">
                   <div className="prop-media">
-                    <img className="main" src={v.photo} alt={v.titre} loading="lazy" />
+                    <img className="main" src={(v.photo || (v.photos && v.photos[0]))} alt={v.titre} loading="lazy" />
                   </div>
                   <div className="prop-meta">
                     <span>{v.surface} m² · {v.ville}</span>
@@ -122,6 +145,7 @@ export function BiensVendus() {
               </Reveal>
             ))}
           </div>
+          )}
           <Reveal style={{ textAlign: 'center', marginTop: 60 }}>
             <p style={{ maxWidth: 600, margin: '0 auto 26px', color: 'var(--smoke)' }}>
               Votre bien pourrait figurer ici. Commençons par une estimation confidentielle.
@@ -177,19 +201,6 @@ export function Agence() {
               </div>
             </Reveal>
           ))}
-        </div>
-      </section>
-
-      <section className="section" id="rejoindre">
-        <div className="container" style={{ textAlign: 'center' }}>
-          <SectionHead title="Nous rejoindre" italic sub="Recrutement" />
-          <Reveal>
-            <p style={{ maxWidth: 660, margin: '0 auto 30px', color: 'var(--smoke)' }}>
-              Apimmo grandit et recherche des consultants qui partagent notre exigence : culture du service,
-              discrétion, goût des belles choses. Envoyez-nous votre parcours — nous lisons chaque candidature.
-            </p>
-            <a href={`mailto:${AGENCE.email}?subject=Candidature%20Apimmo`} className="btn btn--solid">Envoyer ma candidature</a>
-          </Reveal>
         </div>
       </section>
     </>
