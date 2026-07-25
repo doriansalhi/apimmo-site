@@ -111,8 +111,31 @@ export function PropertyCard({ bien }) {
 }
 
 /* ---------- Formulaire d'estimation ---------- */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mwvgwwbb';
+
 export function EstimationForm() {
   const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+
+  async function submit(e) {
+    e.preventDefault();
+    setBusy(true);
+    setError('');
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(e.target),
+      });
+      if (!res.ok) throw new Error('send failed');
+      setSent(true);
+    } catch {
+      setError("L'envoi a échoué. Réessayez, ou contactez-nous directement par téléphone ou email.");
+    }
+    setBusy(false);
+  }
+
   if (sent)
     return (
       <div className="form-ok">
@@ -122,14 +145,8 @@ export function EstimationForm() {
       </div>
     );
   return (
-    <form
-      className="form-grid"
-      onSubmit={(e) => {
-        e.preventDefault();
-        // TODO : brancher Formspree / EmailJS / Supabase Edge Function
-        setSent(true);
-      }}
-    >
+    <form className="form-grid" onSubmit={submit}>
+      <input type="hidden" name="_subject" value="Nouvelle demande — site Apimmo" />
       <div className="field">
         <label htmlFor="est-nom">Nom *</label>
         <input id="est-nom" name="nom" required autoComplete="family-name" />
@@ -176,8 +193,11 @@ export function EstimationForm() {
           conformément à la politique de confidentialité. *
         </span>
       </label>
+      {error && <p style={{ gridColumn: '1 / -1', color: '#c0392b', fontSize: 15, textAlign: 'center' }}>{error}</p>}
       <div className="form-foot">
-        <button type="submit" className="btn btn--solid">Demander mon estimation</button>
+        <button type="submit" className="btn btn--solid" disabled={busy}>
+          {busy ? 'Envoi en cours…' : 'Demander mon estimation'}
+        </button>
       </div>
     </form>
   );

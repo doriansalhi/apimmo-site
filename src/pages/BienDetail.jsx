@@ -16,6 +16,8 @@ export default function BienDetail() {
   const swiperRef = useRef(null);
   const [active, setActive] = useState(0);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState('');
 
   if (loading)
     return (
@@ -108,19 +110,44 @@ export default function BienDetail() {
                   <p>Nous revenons vers vous très rapidement.</p>
                 </div>
               ) : (
-                <form className="form-grid" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
-                  <div className="field"><label htmlFor="d-nom">Nom *</label><input id="d-nom" required /></div>
-                  <div className="field"><label htmlFor="d-email">Email *</label><input id="d-email" type="email" required /></div>
-                  <div className="field"><label htmlFor="d-tel">Téléphone *</label><input id="d-tel" type="tel" required /></div>
+                <form
+                  className="form-grid"
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    setSending(true);
+                    setSendError('');
+                    try {
+                      const res = await fetch('https://formspree.io/f/mwvgwwbb', {
+                        method: 'POST',
+                        headers: { Accept: 'application/json' },
+                        body: new FormData(e.target),
+                      });
+                      if (!res.ok) throw new Error('send failed');
+                      setSent(true);
+                    } catch {
+                      setSendError("L'envoi a échoué. Réessayez ou appelez-nous directement.");
+                    }
+                    setSending(false);
+                  }}
+                >
+                  <input type="hidden" name="_subject" value={`Demande bien réf. ${bien.ref} — ${bien.titre}`} />
+                  <input type="hidden" name="bien_reference" value={bien.ref} />
+                  <input type="hidden" name="bien_titre" value={bien.titre} />
+                  <div className="field"><label htmlFor="d-nom">Nom *</label><input id="d-nom" name="nom" required /></div>
+                  <div className="field"><label htmlFor="d-email">Email *</label><input id="d-email" name="email" type="email" required /></div>
+                  <div className="field"><label htmlFor="d-tel">Téléphone *</label><input id="d-tel" name="telephone" type="tel" required /></div>
                   <div className="field">
                     <label htmlFor="d-msg">Message</label>
-                    <textarea id="d-msg" defaultValue={`Bonjour, je souhaite en savoir plus sur le bien réf. ${bien.ref}.`} />
+                    <textarea id="d-msg" name="message" defaultValue={`Bonjour, je souhaite en savoir plus sur le bien réf. ${bien.ref}.`} />
                   </div>
                   <label className="rgpd">
                     <input type="checkbox" required />
                     <span>J'accepte d'être recontacté(e) au sujet de ce bien. *</span>
                   </label>
-                  <button type="submit" className="btn btn--solid" style={{ width: '100%' }}>Prendre rendez-vous</button>
+                  {sendError && <p style={{ color: '#c0392b', fontSize: 14 }}>{sendError}</p>}
+                  <button type="submit" className="btn btn--solid" style={{ width: '100%' }} disabled={sending}>
+                    {sending ? 'Envoi…' : 'Prendre rendez-vous'}
+                  </button>
                 </form>
               )}
               <p style={{ fontSize: 12.5, color: 'var(--smoke)', marginTop: 18, textAlign: 'center' }}>

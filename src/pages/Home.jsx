@@ -1,5 +1,6 @@
 import TrustindexReviews from '../components/TrustindexReviews';
 import { useState } from 'react';
+import { supabase, supabaseReady } from '../lib/supabase';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
@@ -250,8 +251,12 @@ export default function Home() {
               <p style={{ color: 'var(--gold)', marginTop: 16 }}>✦ Merci, votre inscription est confirmée.</p>
             ) : (
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
+                  const email = e.target.querySelector('input[type="email"]').value;
+                  if (supabaseReady) {
+                    await supabase.from('newsletter').insert({ email }).then(() => {});
+                  }
                   setNewsSent(true);
                 }}
               >
