@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#152238"/>
+  <!-- A d'Apimmo, sans barre (comme le logo), en blanc -->
+  <path d="M32 14 L47 50 H41.5 L32 26.5 L22.5 50 H17 Z" fill="#FFFFFF"/>
+  <!-- mouette dorée -->
+  <path d="M24 55 Q28 51.5 32 54.5 Q36 51.5 40 55" stroke="#B08D57" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+</svg>
